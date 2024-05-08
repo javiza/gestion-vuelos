@@ -3,7 +3,8 @@ import { IonRow, IonCol, IonIcon, IonImg, IonList, IonItem, IonButton, IonConten
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { airplaneOutline, cameraOutline, trashOutline } from 'ionicons/icons'
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-destinos',
@@ -16,7 +17,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class DestinosComponent  implements OnInit {
 
-  constructor() { }
+  constructor() { addIcons({
+    airplaneOutline, cameraOutline, trashOutline
+  })}
 
   ngOnInit() {}
   handleIconClick(icon: string) {

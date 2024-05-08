@@ -3,8 +3,8 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonList, IonItem
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BusquedaComponent } from '../components/busqueda/busqueda.component';
-import { DestinosComponent } from '../components/busqueda/destinos/destinos.component';
+import { BusquedaComponent } from '../../components/busqueda/busqueda.component';
+import { DestinosComponent } from '../../components/destinos/destinos.component';
 
 @Component({
   selector: 'app-home',
