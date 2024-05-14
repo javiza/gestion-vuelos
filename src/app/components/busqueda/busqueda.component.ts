@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular'
 import { Destinos } from 'src/app/modelo/destinos';
 import { DestinosVuelosDataSourceService } from '../../services/destinos-vuelos-data-source.service'; // Importa el servicio
-
+import { Camera, Photo, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-busqueda',
@@ -29,6 +29,8 @@ export class BusquedaComponent implements OnInit {
 
   toastMensaje: string = ""
   destinos: Destinos[] = []; //inicializa el arreglo de destino
+
+  foto: Photo|null = null
 
   constructor(
     private route: ActivatedRoute,
@@ -72,5 +74,13 @@ export class BusquedaComponent implements OnInit {
       })
       await toast.present()
     }
+  async tomarFoto(){
+    this.foto = await Camera.getPhoto({
+      quality:90,
+      resultType: CameraResultType.Uri,
+      saveToGallery: true,
+      correctOrientation: true
+    })
+  }
   
 }

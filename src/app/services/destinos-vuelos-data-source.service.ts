@@ -11,7 +11,7 @@ export class DestinosVuelosDataSourceService {
 
   constructor() { }
 
-  async getDestinos(): Promise<Destinos[]> {
+  async getDestinos(resultadosArray: any): Promise<Destinos[]> {
     // Obtiene los resultados de autosuggest
     const autosuggest = await this.getAutosuggestCB();
 

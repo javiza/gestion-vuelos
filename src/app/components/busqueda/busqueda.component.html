@@ -9,7 +9,9 @@
 
       <div class="separacion2">
         <p class="nombre">{{e.nombre}}</p>
-        <p class="descripcion">{{e.ciudad}}</p>
+
+        <!-- pipes de mayusculas -->
+        <p class="descripcion">{{e.ciudad | uppercase}}</p>
       </div>
 
       <ion-buttons class="separacion">
@@ -21,8 +23,9 @@
       <p>{{e.valor}}</p>
 
       <ion-buttons>
-        <ion-button>
+        <ion-button (click)="tomarFoto()">
           <ion-icon name="camera-outline"></ion-icon>
+          <img *ngIf="foto != null" [src]="foto.webPath" alt="Foto"/>
         </ion-button>
       </ion-buttons>
 
