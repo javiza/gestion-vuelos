@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BusquedaComponent } from '../../components/busqueda/busqueda.component';
-import { DestinosComponent } from '../../components/destinos/destinos.component';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { DestinosComponent } from '../../components/destinos/destinos.component'
   standalone: true,
   imports: [IonicModule,CommonModule,FormsModule, IonHeader, 
     IonToolbar, IonTitle, IonContent, IonLabel, IonList,
-     IonSearchbar, IonItem, BusquedaComponent, DestinosComponent],
+     IonSearchbar, IonItem, BusquedaComponent],
 })
 export class HomePage implements OnInit{
   ngOnInit(){}

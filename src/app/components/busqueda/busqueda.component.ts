@@ -19,14 +19,14 @@ import { Camera, Photo, CameraResultType } from '@capacitor/camera';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, IonHeader,
     IonToolbar, IonTitle, IonContent, IonLabel, IonButtons, IonIcon,
-    IonImg, IonList, IonItem, IonButton, IonCard,
+    IonImg, IonList, IonItem, IonButton, IonCard, IonList,
     IonSearchbar
   ],
 })
 export class BusquedaComponent implements OnInit {
   destinosFiltrados: Destinos[] = []
   destinoSeleccionado: Destinos | undefined = undefined
-
+  modalValorVuelo: boolean = false;
   toastMensaje: string = ""
   destinos: Destinos[] = []; //inicializa el arreglo de destino
 
@@ -43,28 +43,31 @@ export class BusquedaComponent implements OnInit {
   }
   async ngOnInit() {
       this.route.params.subscribe(async params => {
-        this.destinos = params['resultados']; //obtiene el parametro 'resultados' de la ruta
-        this.destinos = await this.destinoRepository.getDestinos(resultadosArray); //llama al metodo getDestinos del servicio
+        this.destinos = await this.destinoRepository.getDestinos(); //llama al metodo getDestinos del servicio
       })
     }
 
-  
+    
     manejarInput(event: any) {
       const terminoBuscado: string = event.target.value ?? ''
-      const fnBusqueda = (destinos: string) =>
-        destinos.toLowerCase().includes(terminoBuscado.toLowerCase())
+      const fnBusqueda = (destino: Destinos) =>
+        destino.name.toLowerCase().includes(terminoBuscado.toLowerCase()) ||
+        destino.city.toLowerCase().includes(terminoBuscado.toLowerCase())
       this.destinosFiltrados = this.destinos.filter(fnBusqueda)
     }
-    abrirModalValor(destinos: Destinos) {
-      this.destinoSeleccionado = destinos
+    abrirModalValor(destino: Destinos) {
+      this.modalValorVuelo = true;
+      this.destinoSeleccionado = destino;
     }
-  async confirmarGuardarValor(){
-      this.toastMensaje = `Confirmado ${this.destinoSeleccionado?.valor} en ${this.destinoSeleccionado}`
-      await this.mostrarToast()
-      this.cerrarModal()
+    async confirmarGuardarValor(){
+      if (this.destinoSeleccionado) {
+        this.toastMensaje = `Confirmado ${this.destinoSeleccionado.name} en ${this.destinoSeleccionado.city}`;
+        await this.mostrarToast();
+        this.cerrarModal();
+      }
     }
     cerrarModal(){
-      this.abrirModalValor = false
+      this.modalValorVuelo = false;
     }
   async mostrarToast(){
       const toast = await this.toastController.create({
@@ -82,5 +85,13 @@ export class BusquedaComponent implements OnInit {
       correctOrientation: true
     })
   }
-  
+  async eliminarDestino(destino: Destinos) {
+
+    const index = this.destinos.indexOf(destino);
+    
+    if (index !== -1) {
+      this.destinos.splice(index, 1);
+    }
+    
+  }
 }

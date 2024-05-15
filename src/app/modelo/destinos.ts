@@ -3,7 +3,8 @@ export class Destinos{
 
         public name: string,
         public city: string,
-        public image: string = ""
+        public image: string = "",
+        public valor: number
 
 
     ) {}

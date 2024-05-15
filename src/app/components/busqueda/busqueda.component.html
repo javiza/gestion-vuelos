@@ -1,17 +1,16 @@
 <ion-content [fullscreen]="true">
-  <ion-searchbar (ionInput)="manejarInput ($event)" [debounce]="1000">
+  <ion-searchbar (ionInput)="manejarInput($event)" [debounce]="1000">
   </ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let e of destinos">
       <div>
-        <ion-img [src]="e.imagen" style="width: 130px; "></ion-img>
+        <ion-img [src]="e.image" style="width: 130px;"></ion-img>
       </div>
 
       <div class="separacion2">
-        <p class="nombre">{{e.nombre}}</p>
-
+        <p class="nombre">{{ e.name }}</p>
         <!-- pipes de mayusculas -->
-        <p class="descripcion">{{e.ciudad | uppercase}}</p>
+        <p class="descripcion">{{ e.city | uppercase }}</p>
       </div>
 
       <ion-buttons class="separacion">
@@ -20,17 +19,17 @@
         </ion-button>
       </ion-buttons>
 
-      <p>{{e.valor}}</p>
+      <p>{{ e.valor }}</p>
 
       <ion-buttons>
         <ion-button (click)="tomarFoto()">
           <ion-icon name="camera-outline"></ion-icon>
-          <img *ngIf="foto != null" [src]="foto.webPath" alt="Foto"/>
+          <img *ngIf="foto != null" [src]="foto.webPath" alt="Foto" />
         </ion-button>
       </ion-buttons>
 
       <ion-buttons>
-        <ion-button>
+        <ion-button (click)="eliminarDestino(e)">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -43,21 +42,22 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button>Cancelar</ion-button>
+            <ion-button (click)="cerrarModal()">Cancelar</ion-button>
           </ion-buttons>
           <ion-title>Valor vuelo ida y vuelta</ion-title>
           <ion-buttons slot="end">
-            <ion-button>Confirmar</ion-button>
+            <ion-button (click)="confirmarGuardarValor()">Confirmar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <p>Valor del vuelo ida y vuelta en USD</p>
+            <p>{{ destinoSeleccionado.valor }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-content>
     </ng-template>
-    <ion-list>
-      <ion-item>
-        <p>Valor del vuelo ida y vuelta en USD</p>
-        <p>valor</p>
-      </ion-item>
-    </ion-list>
   </ion-modal>
-  </ion-list>
 </ion-content>
